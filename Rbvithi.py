@@ -3,11 +3,12 @@
 import rospy
 import sys
 import time
+from src.RosImg2CvImg import RosImg2CvImg
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
 from robovithi.msg import RCV
 
-class image_converter:
+class Rbvithi:
 
   def __init__(self):
     rospy.init_node('talker', anonymous=True)
@@ -15,14 +16,17 @@ class image_converter:
     self.sub = rospy.Subscriber('chatter', RCV, self.callback,queue_size=10)
     
   def callback(self,data):
+    x = RosImg2CvImg()
+    if data.operation != "":
+    	x.ros2cv(data)
     self.pub.publish(data)
 
-def main(args):
+def main():
     try:
-       ic = image_converter()
+       Rbvithi()
        rospy.spin()
     except KeyboardInterrupt:
        print("Shutting down")
 
 if __name__ == '__main__':
-       main(sys.argv)
+       main()
