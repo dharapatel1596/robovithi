@@ -9,7 +9,7 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
-class rosImg2CvImg:
+class RosImg2CvImg:
 
   def ros2cv(self,data):
     self.bridge = CvBridge()

@@ -3,7 +3,7 @@
 import rospy
 import sys
 import time
-from src.rosImg2CvImg import rosImg2CvImg
+from src.RosImg2CvImg import RosImg2CvImg
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
 from robovithi.msg import RCV
@@ -16,7 +16,7 @@ class Rbvithi:
     self.sub = rospy.Subscriber('chatter', RCV, self.callback,queue_size=10)
     
   def callback(self,data):
-    x = rosImg2CvImg()
+    x = RosImg2CvImg()
     if data.operation != "":
     	x.ros2cv(data)
     self.pub.publish(data)
